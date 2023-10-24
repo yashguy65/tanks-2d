@@ -1,0 +1,5 @@
+with open('filename.txt', 'r') as file:
+    rows = file.readlines()
+
+for row in rows:
+    print(row)
