@@ -1,5 +1,6 @@
 import pygame
 from bs4 import BeautifulSoup
+from constants import COLORKEY
 
 class SpriteSheet:
 
@@ -10,14 +11,11 @@ class SpriteSheet:
             print(f"Unable to load spritesheet image: {filename}")
             raise SystemExit(e)
 
-    def image_at(self, rectangle, colorkey = None):
+    def image_at(self, rectangle, colorkey = COLORKEY):
         rect = pygame.Rect(rectangle)
         image = pygame.Surface(rect.size).convert()
         image.blit(self.sheet, (0, 0), rect)
-        if colorkey is not None:
-            if colorkey is -1:
-                colorkey = image.get_at((0,0))
-            image.set_colorkey(colorkey, pygame.RLEACCEL)
+        image.set_colorkey(colorkey, pygame.RLEACCEL)
         return image
     
     def readXML(self):
@@ -36,11 +34,14 @@ class SpriteSheet:
             heights = [i for i in heights_parsed]
             return names,xs,ys,widths,heights
         
-    def loadXML(self,names,xs,ys,widths,heights):
-        p = {}
+    def loadXML(self):
+        names,xs,ys,widths,heights = self.readXML()
+        spritelist = {}
         for i in range(len(names)):
-            p[(names[i].text)] = self.image_at((int(xs[i].text), int(ys[i].text), int(widths[i].text), int(heights[i].text)))
-        return p
+            spritelist[(names[i].text)] = self.image_at((int(xs[i].text), int(ys[i].text), int(widths[i].text), int(heights[i].text)))
+        return spritelist
+    
+
             
     
             
