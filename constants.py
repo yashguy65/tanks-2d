@@ -2,12 +2,8 @@
 import pygame
 pygame.init()
 
-SCREEN_WIDTH = 12500
-SCREEN_HEIGHT = 1250
-START_TIME = None
-
-VIEW_WIDTH = 700
-VIEW_HEIGHT = 500
+VIEW_WIDTH = 1408
+VIEW_HEIGHT = 768
 
 BLUE = (0, 0, 255)
 WHITE = (255, 255, 255)
@@ -19,31 +15,32 @@ BLACK = COLORKEY = (0,0,0)
 SKYBLUE = (135,206,235)
 
 SCORE = 0
+SCALEX = 4
+SCALEY = 3
 
 TILE_MAP = {
-    " ": None,
-    "0": "treeLarge",
-    "1": "treeSmall",
-    "2": "dirt",
-    "3": "grass",
-    "4": "sand"    
+    " ": "dirt",
+    "0": "treelarge",
+    "1": "treesmall",
+    "2": "grass",
+    "3": "sand",
+    
+    "4": "oil",
+    "5": "sandbagbeige",
 }
 
 TANK_MAP = {
-    #"5": ""#"alpha",
-    #"6": ""#"beta",
-    #"7": ""#"gamma"
-    #"8": ""#delta
-}
+    "A": "beige",   # alpha
+    "B": "black",   # beta
+    "C": "green",   # gamma
+    "D": "red",     # delta
+} #blue taken for player as .
 
 tankvelc = 1
-birdlist = []
+tanks = []
+bullets = []
 
-FLAGS = pygame.RESIZABLE | pygame.DOUBLEBUF | pygame.SHOWN #| pygame.NOFRAME
-
-PLAYER_ARGS = { 'x':325, 'y':250, 'w':89, 'h':20,
-                            'rot_angle_constant':0.5, 'max_thrust_mag':0.5}
-
-RUN_PLANE_PHY = RUN_PLAYER_UPDATE = RUN_SIDESCROLL = True
 
 GAMEMODE = 'Starting'
+bounceLimit = 4
+bulletvelc = 0.1
